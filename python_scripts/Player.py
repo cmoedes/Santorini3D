@@ -5,20 +5,11 @@ class Player:
         self.workers = []
         self.captured = False
         for i in range(PLAYER_WORKERS):
-            self.workers.append({
-                "x": -1, 
-                "y":-1,
-                "cap":False
-            })
+            self.workers.append({"x": -1, "y":-1, "cap":False})
     
-    def set_worker_positions(self, workers, positions):
-        if(type(workers) is list):
-            for i, (worker, position) in enumerate(zip(workers, positions)):
-                self.workers[worker]["x"] = position["x"]
-                self.workers[worker]["y"] = position["y"]
-            return
-        self.workers[workers]["x"] = positions["x"]
-        self.workers[workers]["y"] = positions["y"]
+    def set_worker_position(self, worker, x, y):
+        self.workers[worker]["x"] = x
+        self.workers[worker]["y"] = y
     
     def get_valid_moves(self, Board):
         valid_moves = {}
@@ -26,12 +17,12 @@ class Player:
         for worker in self.workers:
             pass
         return valid_moves
-    
-    def execute_move(self, Board):
-        pass
+
     def __str__(self):
-        print("Player:")
+        retstr = ""
+        retstr+="Player:"
         for i, worker in enumerate(self.workers):
-            print(f"\tWorker ${i} - (x, y): (${worker["x"]}, ${worker["y"]})")
+            retstr+= f"\tWorker {i} || {worker}\n"
+        return retstr
 
 
